@@ -3,31 +3,434 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Daily Edge</title>
-  <meta name="description" content="Public launch links for The Daily Edge.">
+  <title>The Daily Edge - Market Analytics for Everyone</title>
+  <meta name="description" content="Public launch links for The Daily Edge, your bring-your-own-provider market analytics platform.">
   <style>
-    :root { color-scheme: dark; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; background: #050505; color: #f5f5f7; line-height: 1.5; }
-    main { max-width: 760px; margin: 0 auto; padding: 48px 20px; }
-    h1 { font-size: 40px; margin: 0 0 10px; }
-    h2 { margin-top: 30px; }
-    p, li { color: #c7c7cc; }
-    a { color: #64d2ff; font-weight: 700; }
-    .card { background: #151517; border: 1px solid #2c2c2e; border-radius: 12px; padding: 18px; margin-top: 16px; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      color-scheme: dark;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+      --primary: #64d2ff;
+      --accent: #00d4ff;
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #151517;
+      --bg-tertiary: #1f1f23;
+      --text-primary: #f5f5f7;
+      --text-secondary: #c7c7cc;
+      --text-tertiary: #8e8e93;
+      --border-color: #2c2c2e;
+      --gradient: linear-gradient(135deg, #64d2ff 0%, #00d4ff 100%);
+    }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 0;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    nav {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 80px;
+      animation: fadeInDown 0.8s ease;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 8vw, 56px);
+      margin-bottom: 16px;
+      line-height: 1.2;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .card {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    .card:hover {
+      border-color: var(--primary);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(100, 210, 255, 0.1);
+    }
+
+    .card h2 {
+      font-size: 22px;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card p {
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      line-height: 1.8;
+    }
+
+    .card ul {
+      list-style: none;
+    }
+
+    .card li {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card li::before {
+      content: '→';
+      color: var(--primary);
+      font-weight: 700;
+      min-width: 20px;
+    }
+
+    .card a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+      position: relative;
+      display: inline-block;
+    }
+
+    .card a:hover {
+      color: var(--accent);
+    }
+
+    .card a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--primary);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    .card a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .icon {
+      font-size: 24px;
+      display: inline-block;
+    }
+
+    footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      padding: 40px 20px;
+      margin-top: 80px;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    footer p {
+      color: var(--text-tertiary);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      nav {
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      nav a {
+        font-size: 13px;
+      }
+
+      main {
+        padding: 40px 20px;
+      }
+
+      .hero {
+        margin-bottom: 60px;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .content-grid {
+        gap: 20px;
+      }
+
+      .card {
+        padding: 24px;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 <body>
-  <main>
-    <h1>The Daily Edge</h1>
-    <p>Public launch and compliance links for the BYO market analytics app.</p>
-    <div class="card">
-      <h2>Links</h2>
-      <ul>
-        <li><a href="privacy.html">Privacy Policy</a></li>
-        <li><a href="support.html">Support</a></li>
-        <li><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Apple Standard Terms of Use</a></li>
-      </ul>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <span class="icon">📊</span>
+        The Daily Edge
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="support.html">Support</a>
+      </nav>
     </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Welcome to The Daily Edge</h1>
+      <p>Your bring-your-own-provider market analytics platform. Keep your data local, maintain your control, and make informed decisions with real-time market insights.</p>
+    </section>
+
+    <section class="content-grid">
+      <div class="card">
+        <h2><span class="icon">🔐</span>Your Data, Your Control</h2>
+        <p>The Daily Edge keeps your API keys, broker credentials, and watchlists on your device. You maintain complete control over your sensitive information at all times.</p>
+      </div>
+
+      <div class="card">
+        <h2><span class="icon">🔗</span>Connect Your Providers</h2>
+        <p>Bring your own provider keys from Alpha Vantage, The Odds API, Twelve Data, OANDA, Coinbase, and many more. Full flexibility without vendor lock-in.</p>
+      </div>
+
+      <div class="card">
+        <h2><span class="icon">📈</span>Market Intelligence</h2>
+        <p>Track sports odds, stocks, crypto, and forex all in one place. Create custom watchlists and monitor markets that matter to you in real-time.</p>
+      </div>
+    </section>
+
+    <section class="content-grid" style="margin-top: 60px;">
+      <div class="card">
+        <h2><span class="icon">📋</span>Legal & Compliance</h2>
+        <p>Review our privacy policy and terms to understand how your data is handled and what protections are in place.</p>
+        <ul>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="support.html">Support & FAQ</a></li>
+          <li><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener noreferrer">Apple Standard Terms</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2><span class="icon">❓</span>Need Help?</h2>
+        <p>Visit our support page for troubleshooting guides, important boundaries, and credential safety information.</p>
+        <ul>
+          <li><a href="support.html">Support Center</a></li>
+          <li><a href="support.html">Before Contacting Support</a></li>
+          <li><a href="support.html">Credential Safety</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2><span class="icon">⚖️</span>Important Disclosures</h2>
+        <p>The Daily Edge does not accept bets, custody funds, or guarantee returns. All market decisions remain your responsibility.</p>
+        <ul>
+          <li><a href="support.html">Learn More</a></li>
+        </ul>
+      </div>
+    </section>
   </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2026 The Daily Edge. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <span>•</span>
+        <a href="support.html">Support</a>
+        <span>•</span>
+        <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener noreferrer">Apple Terms</a>
+      </div>
+      <p>A bring-your-own-provider market analytics platform for informed decision-making.</p>
+    </div>
+  </footer>
 </body>
 </html>

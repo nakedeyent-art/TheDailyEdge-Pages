@@ -3,53 +3,549 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Daily Edge Support</title>
-  <meta name="description" content="Support information for The Daily Edge.">
+  <title>Support & FAQ - The Daily Edge</title>
+  <meta name="description" content="Support information, troubleshooting guides, and FAQs for The Daily Edge.">
   <style>
-    :root { color-scheme: dark; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; background: #050505; color: #f5f5f7; line-height: 1.55; }
-    main { max-width: 860px; margin: 0 auto; padding: 44px 20px; }
-    h1 { font-size: 38px; margin: 0 0 8px; }
-    h2 { margin-top: 30px; }
-    p, li { color: #c7c7cc; }
-    a { color: #64d2ff; font-weight: 700; }
-    .card { background: #151517; border: 1px solid #2c2c2e; border-radius: 12px; padding: 18px; margin-top: 16px; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      color-scheme: dark;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+      --primary: #64d2ff;
+      --accent: #00d4ff;
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #151517;
+      --bg-tertiary: #1f1f23;
+      --text-primary: #f5f5f7;
+      --text-secondary: #c7c7cc;
+      --text-tertiary: #8e8e93;
+      --border-color: #2c2c2e;
+      --warning: #ff9500;
+      --gradient: linear-gradient(135deg, #64d2ff 0%, #00d4ff 100%);
+    }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 0;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 60px;
+      animation: fadeInDown 0.8s ease;
+    }
+
+    .page-header h1 {
+      font-size: clamp(32px, 6vw, 48px);
+      margin-bottom: 16px;
+      line-height: 1.2;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-header p {
+      color: var(--text-secondary);
+      font-size: 16px;
+    }
+
+    .support-intro {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 40px;
+      animation: fadeInUp 0.8s ease 0.2s backwards;
+    }
+
+    .support-intro p {
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    section {
+      margin-bottom: 40px;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .card {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 12px 24px rgba(100, 210, 255, 0.1);
+    }
+
+    .card h2 {
+      font-size: 20px;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card h2::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 24px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    .card.warning h2::before {
+      background: var(--warning);
+    }
+
+    .card p {
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      line-height: 1.8;
+    }
+
+    .card ul {
+      list-style: none;
+      margin-top: 16px;
+    }
+
+    .card li {
+      color: var(--text-secondary);
+      padding-left: 24px;
+      margin-bottom: 10px;
+      position: relative;
+      line-height: 1.8;
+    }
+
+    .card li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .card.warning li::before {
+      content: '⚠';
+      color: var(--warning);
+    }
+
+    .card a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+      position: relative;
+      display: inline-block;
+    }
+
+    .card a:hover {
+      color: var(--accent);
+    }
+
+    .card a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--primary);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    .card a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .faq-item {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .faq-item:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+    }
+
+    .faq-item h3 {
+      font-size: 16px;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .faq-item p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      padding: 40px 20px;
+      margin-top: 80px;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    footer p {
+      color: var(--text-tertiary);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      nav {
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      nav a {
+        font-size: 13px;
+      }
+
+      main {
+        padding: 40px 20px;
+      }
+
+      .page-header h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .faq-grid {
+        gap: 20px;
+      }
+
+      .faq-item {
+        padding: 20px;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 <body>
+  <header>
+    <div class="header-content">
+      <a href="index.html" class="logo">
+        <span>📊</span>
+        The Daily Edge
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="support.html">Support</a>
+      </nav>
+    </div>
+  </header>
+
   <main>
-    <h1>The Daily Edge Support</h1>
-    <p>Use this page for launch support, troubleshooting, and App Review reference.</p>
+    <div class="page-header">
+      <h1>Support & Help Center</h1>
+      <p>Find answers, troubleshooting guides, and important information about The Daily Edge.</p>
+    </div>
 
-    <section class="card">
-      <h2>Before You Contact Support</h2>
-      <ul>
-        <li>Confirm your provider API key is active with the provider.</li>
-        <li>Check provider quota limits before refreshing sports odds or market data.</li>
-        <li>Use Settings &gt; Reset App Data if you need to clear local credentials and cached app data.</li>
-        <li>Use Membership &gt; Restore Purchases if a subscription does not appear active.</li>
-      </ul>
+    <div class="support-intro">
+      <p>Welcome to The Daily Edge support center. This page provides guidance for common issues, troubleshooting steps, and important information about how The Daily Edge works. For issues not covered here, please contact us through the App Store support link.</p>
+    </div>
+
+    <section>
+      <div class="card">
+        <h2>Before Contacting Support</h2>
+        <p>Please review these steps before reaching out to our support team:</p>
+        <ul>
+          <li>Confirm your provider API key is active and valid with the provider</li>
+          <li>Check provider quota limits before refreshing sports odds or market data</li>
+          <li>Verify your internet connection is stable and fast</li>
+          <li>Try restarting the app to refresh all data connections</li>
+          <li>Use Settings → Reset App Data if you need to clear local credentials and cached app data</li>
+          <li>Use Membership → Restore Purchases if a subscription does not appear active</li>
+        </ul>
+      </div>
     </section>
 
-    <section class="card">
-      <h2>Credential Safety</h2>
-      <p>Do not send API keys, broker private keys, seed phrases, account passwords, or live trading credentials to support. The Daily Edge launch model is bring-your-own-provider and device-local.</p>
+    <section>
+      <div class="card warning">
+        <h2>Credential & Security Safety</h2>
+        <p><strong>IMPORTANT:</strong> Never send the following information to support or post it online:</p>
+        <ul>
+          <li>API keys for any market data provider</li>
+          <li>Broker private keys or authentication tokens</li>
+          <li>Seed phrases or cryptocurrency wallet information</li>
+          <li>Account passwords or login credentials</li>
+          <li>Live trading credentials or account numbers</li>
+          <li>Two-factor authentication codes</li>
+        </ul>
+        <p>The Daily Edge follows a bring-your-own-provider model with all credentials stored locally on your device. We never have access to these details, so there's no way we can help recover lost credentials—only your provider can.</p>
+      </div>
     </section>
 
-    <section class="card">
-      <h2>Important Boundaries</h2>
-      <ul>
-        <li>The Daily Edge does not accept sports bets.</li>
-        <li>The Daily Edge does not custody funds or crypto.</li>
-        <li>The Daily Edge does not guarantee profit, wins, returns, or accuracy.</li>
-        <li>All market decisions remain the user's responsibility.</li>
-      </ul>
+    <section>
+      <div class="card">
+        <h2>Privacy & Data Protection</h2>
+        <p>Your privacy and data security are paramount. For complete details on how your data is handled:</p>
+        <ul>
+          <li>Read our comprehensive <a href="privacy.html">Privacy Policy</a></li>
+          <li>Understand what stays on your device vs. what's sent to providers</li>
+          <li>Learn how to delete all your data with one simple action</li>
+        </ul>
+      </div>
     </section>
 
-    <section class="card">
-      <h2>Privacy</h2>
-      <p>Read the <a href="privacy.html">Privacy Policy</a>.</p>
+    <section>
+      <h2 style="color: var(--text-primary); font-size: 22px; margin-bottom: 24px; display: flex; align-items: center; gap: 10px;">
+        <span>❓</span> Frequently Asked Questions
+      </h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3>How do I reset my app data?</h3>
+          <p>Open Settings in The Daily Edge app and select "Reset App Data." This completely removes all local data including API keys, credentials, watchlists, and settings.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>How do I restore my subscription?</h3>
+          <p>Go to Membership → Restore Purchases. Your subscription should appear within moments. If issues persist, contact App Store support.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Where is my data stored?</h3>
+          <p>All your data (API keys, credentials, watchlists) is stored locally on your device only. We never store copies of this information on our servers.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Can you recover my lost API key?</h3>
+          <p>No. Since we don't store copies of your keys, only your provider can help. Contact them directly to regenerate or recover your key.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Why is my market data not updating?</h3>
+          <p>Check that your API key is active with the provider, you haven't exceeded quota limits, and your internet connection is stable. Try restarting the app.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Does The Daily Edge accept live bets?</h3>
+          <p>No. The Daily Edge is a bring-your-own-provider analytics and paper-trading platform. It does not accept or execute real-money bets or trades.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Does The Daily Edge hold my funds or crypto?</h3>
+          <p>No. The Daily Edge does not custody, store, or hold any funds, cryptocurrencies, or assets. All data stays on your device.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Are my market decisions guaranteed?</h3>
+          <p>No. The Daily Edge does not guarantee profits, wins, returns, or market data accuracy. All investment and trading decisions are your responsibility.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="card warning">
+        <h2>Important Disclaimers</h2>
+        <p>Please understand these important boundaries of The Daily Edge:</p>
+        <ul>
+          <li>The Daily Edge does not accept, process, or execute real-money sports bets</li>
+          <li>The Daily Edge does not custody, hold, or manage any funds or cryptocurrencies</li>
+          <li>The Daily Edge does not guarantee profitable outcomes, accurate data, or market returns</li>
+          <li>All investment, trading, and market decisions remain solely your responsibility</li>
+          <li>Market data accuracy depends on your provider—verify critical information</li>
+          <li>Past performance is not indicative of future results</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="card">
+        <h2>Contact Support</h2>
+        <p>For issues not covered in this support center, please reach out to us through the App Store support link for The Daily Edge. When contacting support:</p>
+        <ul>
+          <li>Describe the issue in detail with step-by-step reproduction steps</li>
+          <li>Include your device type, OS version, and app version</li>
+          <li>DO NOT include API keys, credentials, or sensitive information</li>
+          <li>Expected response time is typically 24-48 hours</li>
+        </ul>
+      </div>
     </section>
   </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2026 The Daily Edge. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <span>•</span>
+        <a href="support.html">Support</a>
+        <span>•</span>
+        <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener noreferrer">Apple Terms</a>
+      </div>
+      <p>A bring-your-own-provider market analytics platform for informed decision-making.</p>
+    </div>
+  </footer>
 </body>
 </html>

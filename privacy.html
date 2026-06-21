@@ -3,67 +3,502 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Daily Edge Privacy Policy</title>
-  <meta name="description" content="Privacy Policy for The Daily Edge.">
+  <title>Privacy Policy - The Daily Edge</title>
+  <meta name="description" content="Privacy Policy for The Daily Edge. Learn how we protect your data and what stays on your device.">
   <style>
-    :root { color-scheme: dark; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; background: #050505; color: #f5f5f7; line-height: 1.55; }
-    main { max-width: 860px; margin: 0 auto; padding: 44px 20px; }
-    h1 { font-size: 38px; margin: 0 0 8px; }
-    h2 { margin-top: 30px; }
-    p, li { color: #c7c7cc; }
-    a { color: #64d2ff; font-weight: 700; }
-    .updated { color: #8e8e93; font-size: 14px; }
-    .card { background: #151517; border: 1px solid #2c2c2e; border-radius: 12px; padding: 18px; margin-top: 16px; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      color-scheme: dark;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+      --primary: #64d2ff;
+      --accent: #00d4ff;
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #151517;
+      --bg-tertiary: #1f1f23;
+      --text-primary: #f5f5f7;
+      --text-secondary: #c7c7cc;
+      --text-tertiary: #8e8e93;
+      --border-color: #2c2c2e;
+      --success: #34c759;
+      --gradient: linear-gradient(135deg, #64d2ff 0%, #00d4ff 100%);
+    }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 0;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 60px;
+      animation: fadeInDown 0.8s ease;
+    }
+
+    .page-header h1 {
+      font-size: clamp(32px, 6vw, 48px);
+      margin-bottom: 16px;
+      line-height: 1.2;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-header p {
+      color: var(--text-secondary);
+      font-size: 16px;
+    }
+
+    .updated {
+      color: var(--text-tertiary);
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .toc {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 40px;
+      animation: fadeInUp 0.8s ease 0.2s backwards;
+    }
+
+    .toc h3 {
+      font-size: 16px;
+      margin-bottom: 16px;
+      color: var(--primary);
+    }
+
+    .toc ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .toc li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toc a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .toc a:hover {
+      color: var(--primary);
+    }
+
+    section {
+      margin-bottom: 40px;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .card {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 12px 24px rgba(100, 210, 255, 0.1);
+    }
+
+    .card h2 {
+      font-size: 20px;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card h2::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 24px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    .card p {
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      line-height: 1.8;
+    }
+
+    .card ul {
+      list-style: none;
+      margin-top: 16px;
+    }
+
+    .card li {
+      color: var(--text-secondary);
+      padding-left: 24px;
+      margin-bottom: 10px;
+      position: relative;
+      line-height: 1.8;
+    }
+
+    .card li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    .card a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+      position: relative;
+      display: inline-block;
+    }
+
+    .card a:hover {
+      color: var(--accent);
+    }
+
+    .card a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--primary);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    .card a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      padding: 40px 20px;
+      margin-top: 80px;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    footer p {
+      color: var(--text-tertiary);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      nav {
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      nav a {
+        font-size: 13px;
+      }
+
+      main {
+        padding: 40px 20px;
+      }
+
+      .page-header h1 {
+        font-size: 28px;
+      }
+
+      .toc {
+        padding: 20px;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 <body>
+  <header>
+    <div class="header-content">
+      <a href="index.html" class="logo">
+        <span>📊</span>
+        The Daily Edge
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="support.html">Support</a>
+      </nav>
+    </div>
+  </header>
+
   <main>
-    <h1>Privacy Policy</h1>
-    <p class="updated">Last updated: June 20, 2026</p>
-    <p>The Daily Edge is designed as a bring-your-own-provider analytics app. Users may enter their own API keys, broker credentials, watchlists, preferences, and local account information. The first public launch keeps these credentials on the user's device.</p>
+    <div class="page-header">
+      <h1>Privacy Policy</h1>
+      <p class="updated">Last updated: June 20, 2026</p>
+    </div>
 
-    <section class="card">
-      <h2>Data Stored On Device</h2>
+    <div class="toc">
+      <h3>📑 Quick Navigation</h3>
       <ul>
-        <li>Local app account records and optional two-factor setup.</li>
-        <li>User-supplied provider API keys.</li>
-        <li>User-supplied broker or execution credentials.</li>
-        <li>Watchlists, favorites, settings, cached scans, and paper-tracking results.</li>
+        <li>✓ Data Stored On Device</li>
+        <li>✓ Data Sent To Providers</li>
+        <li>✓ What We Don't Collect</li>
+        <li>✓ Data Deletion</li>
+        <li>✓ Tracking & Analytics</li>
+        <li>✓ Contact & Support</li>
       </ul>
+    </div>
+
+    <section>
+      <div class="card">
+        <h2>Overview</h2>
+        <p>The Daily Edge is designed as a bring-your-own-provider analytics app. Users may enter their own API keys, broker credentials, watchlists, preferences, and local account information. The first public launch keeps these credentials on the user's device, giving you complete control over your sensitive data.</p>
+      </div>
     </section>
 
-    <section class="card">
-      <h2>Data Sent To Providers</h2>
-      <p>When a user enters a provider key and refreshes a market, the app may send requests directly to that provider, such as The Odds API, Alpha Vantage, Twelve Data, Brave Search, AI providers, OANDA, Polymarket, Robinhood Crypto, or Coinbase, depending on what the user configured.</p>
-      <p>Each provider handles data under its own privacy policy and terms.</p>
+    <section>
+      <div class="card">
+        <h2>Data Stored On Your Device</h2>
+        <p>The following data is stored locally on your device and never sent to The Daily Edge servers:</p>
+        <ul>
+          <li>Local app account records and optional two-factor authentication setup</li>
+          <li>User-supplied provider API keys for market data sources</li>
+          <li>User-supplied broker or execution credentials for trading platforms</li>
+          <li>Custom watchlists, favorites, preferences, and app settings</li>
+          <li>Cached market scans and paper-trading results</li>
+        </ul>
+      </div>
     </section>
 
-    <section class="card">
-      <h2>What Daily Edge Does Not Collect At Launch</h2>
-      <ul>
-        <li>Daily Edge-owned copies of user provider keys.</li>
-        <li>Daily Edge-owned copies of broker private keys.</li>
-        <li>Payment card numbers; Apple handles subscription billing.</li>
-        <li>Sportsbook login credentials.</li>
-        <li>Real-money sports bets.</li>
-      </ul>
+    <section>
+      <div class="card">
+        <h2>Data Sent To Providers</h2>
+        <p>When you enter a provider key and refresh market data, the app may send requests directly to that provider's API. Supported providers include:</p>
+        <ul>
+          <li>The Odds API for sports odds and betting data</li>
+          <li>Alpha Vantage and Twelve Data for stock market data</li>
+          <li>OANDA and Forex providers for currency trading</li>
+          <li>Coinbase and Robinhood Crypto for cryptocurrency data</li>
+          <li>Polymarket and other decentralized exchanges</li>
+          <li>Brave Search, AI providers, and other data sources</li>
+        </ul>
+        <p>Each provider handles your data under their own privacy policy and terms of service. The Daily Edge does not control how third-party providers process your information.</p>
+      </div>
     </section>
 
-    <section class="card">
-      <h2>Account And Data Deletion</h2>
-      <p>Users can use Settings &gt; Reset App Data to delete local API keys, broker credentials, accounts, preferences, cached scans, watchlists, and saved app data from the device.</p>
+    <section>
+      <div class="card">
+        <h2>What We Don't Collect At Launch</h2>
+        <p>For your security and privacy, The Daily Edge explicitly does NOT collect:</p>
+        <ul>
+          <li>Daily Edge-owned server copies of your provider API keys</li>
+          <li>Daily Edge-owned server copies of your broker private keys</li>
+          <li>Payment card numbers (Apple App Store handles all billing)</li>
+          <li>Sportsbook login credentials</li>
+          <li>Real-money sports bets or transaction history</li>
+        </ul>
+      </div>
     </section>
 
-    <section class="card">
-      <h2>Tracking</h2>
-      <p>The first public launch does not use third-party tracking for advertising. If tracking is added later, this policy and App Store privacy answers must be updated first.</p>
+    <section>
+      <div class="card">
+        <h2>Account And Data Deletion</h2>
+        <p>You maintain full control over your data. To delete all local app data:</p>
+        <ul>
+          <li>Open The Daily Edge app and go to Settings</li>
+          <li>Select "Reset App Data" to completely wipe your device</li>
+          <li>This permanently removes your API keys, credentials, accounts, preferences, cached scans, watchlists, and all other saved app data</li>
+        </ul>
+        <p>Since The Daily Edge doesn't store copies of your data on our servers, there is nothing to delete remotely.</p>
+      </div>
     </section>
 
-    <section class="card">
-      <h2>Contact</h2>
-      <p>For support, use the App Store support link for The Daily Edge or visit <a href="support.html">Support</a>.</p>
+    <section>
+      <div class="card">
+        <h2>Tracking & Analytics</h2>
+        <p>The first public launch of The Daily Edge does not use third-party tracking services for advertising or analytics purposes. If we add tracking in future updates, this privacy policy and App Store privacy answers will be updated first, and you will be notified.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="card">
+        <h2>Contact & Support</h2>
+        <p>For privacy-related questions or support, use the App Store support link for The Daily Edge or visit our <a href="support.html">Support page</a>. Do not send API keys or credentials to support—we cannot access your local device data.</p>
+      </div>
     </section>
   </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2026 The Daily Edge. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <span>•</span>
+        <a href="support.html">Support</a>
+        <span>•</span>
+        <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener noreferrer">Apple Terms</a>
+      </div>
+      <p>A bring-your-own-provider market analytics platform for informed decision-making.</p>
+    </div>
+  </footer>
 </body>
 </html>
